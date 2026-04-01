@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Квиз: {{ lesson.title }}</title>
+    <style>body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; } .question { margin-bottom: 15px; }</style>
+</head>
+<body>
+    <h1>Квиз по уроку: {{ lesson.title }}</h1>
+
+    {% if score %}
+        <h2 style="color: #28a745;">{{ score }}</h2>
+        <a href="{% url 'lesson_detail' lesson.id %}">Вернуться к уроку</a>
+    {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            {% for q in questions %}
+                <div class="question">
+                    <label><b>{{ q.question }}</b></label><br>
+                    <input type="text" name="{{ q.id }}" required>
+                </div>
+            {% endfor %}
+            <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Проверить ответы</button>
+        </form>
+    {% endif %}
+</body>
+</html>
