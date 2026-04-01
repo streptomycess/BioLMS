@@ -5,6 +5,18 @@
     <style>body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }</style>
 </head>
 <body>
+    <div style="float: right;">
+        {% if user.is_authenticated %}
+            <span>Привет, {{ user.username }}!</span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="margin-left: 10px;">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Вход</a> | <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    </div>
+
     <h1>Уроки биологии</h1>
     <ul>
         {% for lesson in lessons %}
@@ -16,6 +28,6 @@
         {% endfor %}
     </ul>
     <br>
-    <a href="{% url 'admin:index' %}" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px;">Панель управления</a>
+    <a href="{% url 'admin:index' %}" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">Панель управления</a>
 </body>
 </html>
