@@ -1,3 +1,4 @@
+import re
 from django.db import models
 
 class Lesson(models.Model):
@@ -6,8 +7,10 @@ class Lesson(models.Model):
 
     @property
     def embed_url(self):
-        # Превращаем обычную ссылку в ссылку для встраивания плеера
-        return self.video_url.replace("watch?v=", "embed/")
+        match = re.search(r'(?:v=|\/)([0-9A-Za-z_-]{11})', self.video_url)
+        if match:
+            return f"https://www.youtube.com/embed/{match.group(1)}"
+        return self.video_url
 
     def __str__(self):
         return self.title
