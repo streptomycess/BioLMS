@@ -1,3 +1,4 @@
+"""URL routing configuration for the biology app."""
 from django.urls import path, include
 from . import views
 

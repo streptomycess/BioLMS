@@ -1,3 +1,3 @@
-from django.test import TestCase
+"""Tests for the biology app."""
 
-# Create your tests here.
+# Add your tests here.
