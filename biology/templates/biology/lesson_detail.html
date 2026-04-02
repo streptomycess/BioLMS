@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ lesson.title }}</title>
-    <style>body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }</style>
-</head>
-<body>
+{% extends 'biology/base.html' %}
+
+{% block title %}{{ lesson.title }}{% endblock %}
+
+{% block content %}
     <h1>Урок: {{ lesson.title }}</h1>
-    
+
     <iframe width="800" height="450" src="{{ lesson.embed_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    
+
     <br><br>
-    <a href="{% url 'lesson_quiz' lesson.id %}" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">Перейти к квизу</a>
-</body>
-</html>
+    <a href="{% url 'lesson_quiz' lesson.id %}" class="btn btn-success">Перейти к квизу</a>
+{% endblock %}

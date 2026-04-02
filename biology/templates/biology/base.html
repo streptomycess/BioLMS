@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Тренажер по биологии{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .nav-bar { float: right; margin-bottom: 20px; }
+        .btn { padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px; display: inline-block; border: none; cursor: pointer; font-size: 14px; }
+        .btn-primary { background: #007bff; }
+        .btn-success { background: #28a745; }
+        .btn-secondary { background: #6c757d; }
+        .content { clear: both; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        {% if user.is_authenticated %}
+            <span>Привет, {{ user.username }}!</span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="margin-left: 10px;">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Вход</a> | <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+        <br>
+        <a href="{% url 'home' %}" style="float: right; margin-top: 10px;">На главную</a>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
