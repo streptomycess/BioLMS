@@ -1,0 +1,25 @@
+{% extends 'biology/base.html' %}
+
+{% block title %}Моя статистика{% endblock %}
+
+{% block content %}
+    <h1>Моя статистика</h1>
+
+    <div style="margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+        <h3>Общий прогресс по курсу</h3>
+        <p>Пройдено уроков: <strong>{{ progress_records.count }} из {{ total_lessons }}</strong> ({{ course_completion }}%)</p>
+        <p>Общая точность ответов: <strong>{{ overall_accuracy }}%</strong></p>
+    </div>
+
+    <h3>Статистика по изученным урокам</h3>
+    <ul>
+        {% for record in progress_records %}
+            <li style="margin-bottom: 10px;">
+                <a href="{% url 'lesson_detail' record.lesson.id %}"><strong>{{ record.lesson.title }}</strong></a>:
+                {{ record.score }} из {{ record.total }} правильных ответов
+            </li>
+        {% empty %}
+            <li>Вы еще не прошли ни одного квиза. Завершите первый урок, чтобы увидеть статистику!</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

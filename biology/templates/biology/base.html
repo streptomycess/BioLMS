@@ -17,6 +17,7 @@
     <div class="nav-bar">
         {% if user.is_authenticated %}
             <span>Привет, {{ user.username }}!</span>
+            <a href="{% url 'statistics' %}" style="margin-left: 10px;">Моя статистика</a>
             <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" style="margin-left: 10px;">Выйти</button>
