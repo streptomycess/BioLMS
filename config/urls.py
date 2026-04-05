@@ -1,3 +1,6 @@
+"""
+URL configuration for the biology project.
+"""
 from django.contrib import admin
 from django.urls import path, include
 
